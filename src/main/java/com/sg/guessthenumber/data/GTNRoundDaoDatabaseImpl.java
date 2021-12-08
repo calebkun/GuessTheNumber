@@ -58,6 +58,13 @@ public class GTNRoundDaoDatabaseImpl implements GTNRoundDao {
         
         return rounds;
     }
+
+    @Override
+    public void deleteRoundById(int id) {
+        final String DELETE_ROUND = "DELETE FROM gtnround WHERE id = ?";
+        jdbcTemplate.update(DELETE_ROUND, id);
+    }
+    
     
     public static final class RoundMapper implements RowMapper<Round> {
 
@@ -67,6 +74,7 @@ public class GTNRoundDaoDatabaseImpl implements GTNRoundDao {
             round.setRoundId(rs.getInt("id"));
             round.setGuess(rs.getString("guess"));
             round.setGuessTime(rs.getTimestamp("guessTime").toLocalDateTime());
+            round.setResult(rs.getString("result"));
             return round;
         }
     }

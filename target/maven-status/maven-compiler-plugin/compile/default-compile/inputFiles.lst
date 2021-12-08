@@ -1,7 +1,9 @@
 /Users/calebdiaz/NetBeansProjects/GuessTheNumber/src/main/java/com/sg/guessthenumber/data/GTNGameDao.java
 /Users/calebdiaz/NetBeansProjects/GuessTheNumber/src/main/java/com/sg/guessthenumber/data/GTNGameDaoInMemoryImpl.java
 /Users/calebdiaz/NetBeansProjects/GuessTheNumber/src/main/java/com/sg/guessthenumber/controllers/Error.java
+/Users/calebdiaz/NetBeansProjects/GuessTheNumber/src/main/java/com/sg/guessthenumber/service/GTNInvalidGuessException.java
 /Users/calebdiaz/NetBeansProjects/GuessTheNumber/src/main/java/com/sg/guessthenumber/models/Game.java
+/Users/calebdiaz/NetBeansProjects/GuessTheNumber/src/main/java/com/sg/guessthenumber/service/GTNFinishedGameException.java
 /Users/calebdiaz/NetBeansProjects/GuessTheNumber/src/main/java/com/sg/guessthenumber/controllers/GTNController.java
 /Users/calebdiaz/NetBeansProjects/GuessTheNumber/src/main/java/com/sg/guessthenumber/data/GTNRoundDaoDatabaseImpl.java
 /Users/calebdiaz/NetBeansProjects/GuessTheNumber/src/main/java/com/sg/guessthenumber/models/Guess.java

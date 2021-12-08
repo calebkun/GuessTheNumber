@@ -7,6 +7,8 @@ package com.sg.guessthenumber.controllers;
 import com.sg.guessthenumber.models.Game;
 import com.sg.guessthenumber.models.Guess;
 import com.sg.guessthenumber.models.Round;
+import com.sg.guessthenumber.service.GTNFinishedGameException;
+import com.sg.guessthenumber.service.GTNInvalidGuessException;
 import com.sg.guessthenumber.service.GTNServiceLayer;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -23,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author calebdiaz
  */
 @RestController
-@RequestMapping("/api/game")
+@RequestMapping("/api")
 public class GTNController {
     
     private final GTNServiceLayer service;
@@ -32,7 +34,7 @@ public class GTNController {
         this.service = service;
     }
     
-    @PostMapping
+    @PostMapping("/begin")
     public ResponseEntity<Game> begin(){
         Game result = service.begin();
         if (result == null) {
@@ -42,21 +44,28 @@ public class GTNController {
     }
     
     
-    @PostMapping("/round")
+    @PostMapping("/guess")
     public ResponseEntity<Round> guess(@RequestBody Guess guess){
-        Round result = service.guess(guess);
+        Round result = null;
+        try {
+            result = service.guess(guess);
+        } catch (GTNInvalidGuessException e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
+        } catch (GTNFinishedGameException e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
+        }
         if (result == null) {
             return new ResponseEntity("There was an error playing your round.", HttpStatus.UNPROCESSABLE_ENTITY);
         }
         return ResponseEntity.ok(result);
     }
     
-    @GetMapping
+    @GetMapping("/game")
     public List<Game> allGames(){
         return service.getAllGames();
     }
     
-    @GetMapping("/{gameId}")
+    @GetMapping("/game/{gameId}")
     public ResponseEntity<Game> findGameById(@PathVariable int gameId){
         Game result = service.getGameById(gameId);
         if (result == null) {
@@ -65,7 +74,7 @@ public class GTNController {
         return ResponseEntity.ok(result);
     }
     
-    @GetMapping("/round/{gameId}")
+    @GetMapping("/rounds/{gameId}")
     public ResponseEntity<List<Round>> allRoundsById(@PathVariable int gameId){
         List<Round> result = service.getAllRounds(gameId);
         if (result == null) {

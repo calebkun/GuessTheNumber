@@ -16,5 +16,6 @@ public interface GTNRoundDao {
     
     Round beginRound(Round round);
     List<Round> getRoundsForGame(Game game);
+    void deleteRoundById(int id);
 
 }

@@ -43,5 +43,12 @@ public class GTNRoundDaoInMemoryImpl implements GTNRoundDao {
                 .collect(Collectors.toList());
         return roundsForGame;
     }
+
+    @Override
+    public void deleteRoundById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
             
 }

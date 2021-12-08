@@ -17,5 +17,6 @@ public interface GTNGameDao {
     List<Game> getAllGames();
     Game findGameById(int gameId);
     boolean updateGame(Game game);
+    void deleteGameById(int id);
 
 }

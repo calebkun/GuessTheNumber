@@ -13,7 +13,8 @@ import java.util.List;
 public interface GTNServiceLayer {
     
     Game begin();
-    Round guess(Guess guess);
+    Round guess(Guess guess) throws GTNInvalidGuessException,
+            GTNFinishedGameException;
     List<Game> getAllGames();
     Game getGameById(int gameId);
     List<Round> getAllRounds(int gameId);

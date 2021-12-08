@@ -44,14 +44,17 @@ public class GTNServiceLayerImpl implements GTNServiceLayer {
     }
 
     @Override
-    public Round guess(Guess guess) {
+    public Round guess(Guess guess) throws GTNInvalidGuessException,
+            GTNFinishedGameException {
         Round round = new Round();
         Game game = gameDao.findGameById(guess.getGameId());
         
-        String validated = validateGuess(guess.getGuess());
+        validateGuess(guess.getGuess());
         
-        if(game == null || validated == null){
+        if(game == null){
             return null;
+        } else if(game.getFinished()){
+            throw new GTNFinishedGameException("Cannot begin round. This game has already been completed.");
         } else {
             String result = calculateResult(guess.getGuess(), game.getAnswer());
             
@@ -114,17 +117,17 @@ public class GTNServiceLayerImpl implements GTNServiceLayer {
         return answer;
     }
     
-    private String validateGuess(String guess){
-        // return null if the string contains non-numerical characters
+    public String validateGuess(String guess) throws GTNInvalidGuessException {
+        // throw exception if the string contains non-numerical characters
         try {
             Integer.parseInt(guess);
         } catch(NumberFormatException e){
-            return null;
+            throw new GTNInvalidGuessException("Invalid guess. Contains non-numeric characters.");
         }
 
-        // return null if guess is greater than 4 digits
+        // throw exception if guess is not 4 digits
         if(guess.length() != 4){
-            return null;
+            throw new GTNInvalidGuessException("Invalid guess. Guess must be 4 digits.");
         }
         
         // check if guess contains duplicate digits
@@ -134,7 +137,7 @@ public class GTNServiceLayerImpl implements GTNServiceLayer {
         
         Set<Character> set = new HashSet<>(ch);
         if(set.size() != 4){
-            return null;
+            throw new GTNInvalidGuessException("Invalid guess. Contains duplicate digits.");
         }
         
         return guess;

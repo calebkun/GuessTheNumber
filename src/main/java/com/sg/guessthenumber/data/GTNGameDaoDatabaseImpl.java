@@ -81,6 +81,15 @@ public class GTNGameDaoDatabaseImpl implements GTNGameDao {
                 game.getFinished(),
                 game.getGameId()) > 0;
     }
+
+    @Override
+    public void deleteGameById(int id) {
+        final String DELETE_ROUND_BY_GAME = "DELETE FROM gtnround WHERE gameId = ?";
+        jdbcTemplate.update(DELETE_ROUND_BY_GAME, id);
+        
+        final String DELETE_GAME = "DELETE FROM game WHERE id = ?";
+        jdbcTemplate.update(DELETE_GAME, id);
+    }
     
     public static final class GameMapper implements RowMapper<Game> {
 

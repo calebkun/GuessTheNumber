@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: com.sg.guessthenumber.data.GTNGameDaoDatabaseImplTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.007 s <<< FAILURE! - in com.sg.guessthenumber.data.GTNGameDaoDatabaseImplTest
+testGetAllGames(com.sg.guessthenumber.data.GTNGameDaoDatabaseImplTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: expected:<2> but was:<1>
+	at com.sg.guessthenumber.data.GTNGameDaoDatabaseImplTest.testGetAllGames(GTNGameDaoDatabaseImplTest.java:70)
+
+testUpdateGame(com.sg.guessthenumber.data.GTNGameDaoDatabaseImplTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: expected:<com.sg.guessthenumber.models.Game@4cf3d01> but was:<null>
+	at com.sg.guessthenumber.data.GTNGameDaoDatabaseImplTest.testUpdateGame(GTNGameDaoDatabaseImplTest.java:86)
+
+testBeginFindGame(com.sg.guessthenumber.data.GTNGameDaoDatabaseImplTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: expected:<com.sg.guessthenumber.models.Game@4cf3d01> but was:<null>
+	at com.sg.guessthenumber.data.GTNGameDaoDatabaseImplTest.testBeginFindGame(GTNGameDaoDatabaseImplTest.java:52)
+
